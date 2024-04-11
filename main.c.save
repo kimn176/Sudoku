@@ -1,0 +1,226 @@
+//CHIONI Clément
+//COUTANCEAU Martin
+//HO Ngoc Kim Ngan
+//AUDEBERT Dorine
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Sudoku.h"
+
+
+
+int main()
+{
+//    Grid tab = malloc(sizeof(Sudoku));
+//    initTab(tab);
+
+    printf("\n");
+
+//
+//    add_value(tab, 0, 0, 0); // 7
+//    add_value(tab, 0, 1, 8);
+//    add_value(tab, 0, 2, 1);
+//    add_value(tab, 0, 3, 4);
+//    add_value(tab, 0, 4, 5);
+//    add_value(tab, 0, 5, 2);
+//    add_value(tab, 0, 6, 6);
+//    add_value(tab, 0, 7, 9);
+//    add_value(tab, 0, 8, 3);
+//
+//    add_value(tab, 1, 0, 5);
+//    add_value(tab, 1, 1, 6);
+//    add_value(tab, 1, 2, 3);
+//    add_value(tab, 1, 3, 9);
+//    add_value(tab, 1, 4, 1);
+//    add_value(tab, 1, 5, 7);
+//    add_value(tab, 1, 6, 2);
+//    add_value(tab, 1, 7, 4);
+//    add_value(tab, 1, 8, 8);
+//
+//    add_value(tab, 2, 0, 2);
+//    add_value(tab, 2, 1, 4);
+//    add_value(tab, 2, 2, 9);
+//    add_value(tab, 2, 3, 6);
+//    add_value(tab, 2, 4, 3);
+//    add_value(tab, 2, 5, 8);
+//    add_value(tab, 2, 6, 5);
+//    add_value(tab, 2, 7, 1);
+//    add_value(tab, 2, 8, 7);
+//
+//    add_value(tab, 3, 0, 3);
+//    add_value(tab, 3, 1, 5);
+//    add_value(tab, 3, 2, 4);
+//    add_value(tab, 3, 3, 2);
+//    add_value(tab, 3, 4, 8);
+//    add_value(tab, 3, 5, 6);
+//    add_value(tab, 3, 6, 1);
+//    add_value(tab, 3, 7, 7);
+//    add_value(tab, 3, 8, 9);
+//
+//    add_value(tab, 4, 0, 6);
+//    add_value(tab, 4, 1, 7);
+//    add_value(tab, 4, 2, 2);
+//    add_value(tab, 4, 3, 1);
+//    add_value(tab, 4, 4, 9);
+//    add_value(tab, 4, 5, 4);
+//    add_value(tab, 4, 6, 3);
+//    add_value(tab, 4, 7, 8);
+//    add_value(tab, 4, 8, 5);
+//
+//    add_value(tab, 5, 0, 9);
+//    add_value(tab, 5, 1, 1);
+//    add_value(tab, 5, 2, 8);
+//    add_value(tab, 5, 3, 0);
+//    add_value(tab, 5, 4, 7);
+//    add_value(tab, 5, 5, 3);
+//    add_value(tab, 5, 6, 4);
+//    add_value(tab, 5, 7, 2);
+//    add_value(tab, 5, 8, 6);
+//
+//    add_value(tab, 6, 0, 4);
+//    add_value(tab, 6, 1, 9);
+//    add_value(tab, 6, 2, 5);
+//    add_value(tab, 6, 3, 8);
+//    add_value(tab, 6, 4, 6);
+//    add_value(tab, 6, 5, 0);
+//    add_value(tab, 6, 6, 7);
+//    add_value(tab, 6, 7, 3);
+//    add_value(tab, 6, 8, 0);
+//
+//    add_value(tab, 7, 0, 1);
+//    add_value(tab, 7, 1, 3);
+//    add_value(tab, 7, 2, 6);
+//    add_value(tab, 7, 3, 7);
+//    add_value(tab, 7, 4, 2);
+//    add_value(tab, 7, 5, 9);
+//    add_value(tab, 7, 6, 0);
+//    add_value(tab, 7, 7, 5);
+//    add_value(tab, 7, 8, 4);
+//
+//    add_value(tab, 8, 0, 8);
+//    add_value(tab, 8, 1, 2);
+//    add_value(tab, 8, 2, 7);
+//    add_value(tab, 8, 3, 3);
+//    add_value(tab, 8, 4, 4);
+//    add_value(tab, 8, 5, 5);
+//    add_value(tab, 8, 6, 9);
+//    add_value(tab, 8, 7, 6);
+//    add_value(tab, 8, 8, 1);
+
+
+
+///    ------------  TEST LES REGLES  ----------     ///
+
+    void afficherMenu()
+    {
+        printf("Menu :\n");
+        printf("1. Dernière case libre\n");
+        printf("2. Dernière case restante\n");
+        printf("3. Dernier nombre possible\n");
+        printf("4. Quitter\n");
+        printf("Choisissez une option (1-%d): ", NB_REGLE +1);
+    }
+
+
+    void afficherResul (Grid tab){
+    AfficheTab(tab);
+    printf("Resultat line : %d \n", line_valid(tab, 0));
+    printf("Resultat column : %d \n", column_valid(tab, 0));
+    printf("Resultat square : %d\n", square_valid(tab, 0,0));
+    printf("Resultat sudoku : %d\n", sudoku_valid(tab));
+
+    free(tab);
+    }
+
+
+    Grid tab1 = malloc(sizeof(Sudoku));
+    initTab(tab1);
+
+    add_value(tab1, 0,0,1);
+    add_value(tab1, 0,1,2);
+    add_value(tab1, 0,2,3);
+    add_value(tab1, 1,0,4);
+    add_value(tab1, 1,1,5);
+    add_value(tab1, 1,2,6);
+    add_value(tab1, 2,0,7);
+    add_value(tab1, 2,1,8);
+
+
+
+    Grid tab2 = malloc(sizeof(Sudoku));
+    initTab(tab2);
+
+    add_value(tab2, 0,0,2);
+    add_value(tab2, 0,4,7);
+    add_value(tab2, 0,7,3);
+    add_value(tab2, 0,8,8);
+    add_value(tab2, 2,4,4);
+    add_value(tab2, 5,6,4);
+    add_value(tab2, 6,2,4);
+    add_value(tab2, 7,3,4);
+
+//    add_value(tab2, 4,2,8);
+//    add_value(tab2, 6,4,8);
+//    add_value(tab2, 8,0,9);
+//    add_value(tab2, 8,1,1);
+//    add_value(tab2, 7,1,6);
+
+
+    Grid tab3 = malloc(sizeof(Sudoku));
+    initTab(tab3);
+
+    add_value(tab3, 0,0,2);
+    add_value(tab3, 0,1,4);
+    add_value(tab3, 0,2,6);
+    add_value(tab3, 1,3,3);
+    add_value(tab3, 1,5,6);
+    add_value(tab3, 1,7,7);
+    add_value(tab3, 1,8,4);
+    add_value(tab3, 2,0,3);
+    add_value(tab3, 2,0,3);
+    add_value(tab3, 2,1,7);
+    add_value(tab3, 4,0,1);
+    add_value(tab3, 7,0,8);
+    add_value(tab3, 8,0,9);
+
+
+    int option;
+
+    do
+    {
+        afficherMenu();
+        scanf("%d\n", &option);
+        printf("Test de la regle %d", option);
+
+        switch(option) {
+        case 1:
+            derniereCaseLibre(tab1, 2,2);
+            afficherResul(tab1);
+            break;
+        case 2:
+            for (int i = 1; i<= NB_LONGUEUR; i++) {
+                dernierCaseRestante(tab2, 0,1,i);
+            }
+            afficherResul(tab2);
+            break;
+        case 3:
+            dernierNombrePossible(tab3,0,0);
+            afficherResul(tab3);
+            break;
+        default :
+            printf("Option invalide. Veuillez choisir une option valide.\n");
+        }
+    }while (option != NB_REGLE + 1);
+
+
+
+
+
+    //dernierCaseRestante(tab2, 0, 0);
+
+
+
+
+    return 0;
+}

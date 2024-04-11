@@ -1,0 +1,38 @@
+#ifndef SUDOKU_H_INCLUDED
+#define SUDOKU_H_INCLUDED
+#include <stdbool.h>
+#include <math.h>
+
+#define NB_LONGUEUR 9
+#define NB_CASE NB_LONGUEUR*NB_LONGUEUR
+#define NB_CARRE (int)sqrt(NB_LONGUEUR)
+#define NB_REGLE 3
+
+typedef struct {
+    int Tab[NB_LONGUEUR][NB_LONGUEUR];
+} Sudoku;
+typedef Sudoku *Grid;
+
+void AfficheTab(Grid tab);
+void initTab(Grid tab);
+void Print_Tiret(int n);
+
+void add_value(Grid tab, int x, int y, int val);
+void rem_value(Grid tab, int x, int y);
+
+bool valid(Grid tab, int xmin, int ymin, int xmax, int ymax);
+bool line_valid(Grid tab, int x);
+bool column_valid(Grid tab, int y);
+bool square_valid(Grid tab, int x, int y);
+bool sudoku_valid(Grid tab);
+
+void derniereCaseLibre(Grid tab, int x, int y);
+bool isExist(Grid tab, int x, int y, int val);
+void dernierCaseRestante(Grid tab, int x, int y, int val);
+//void dernierCaseRestante(Grid tab, int val);
+bool dernierNombrePossible( Grid tab, int x, int y);
+
+
+//bool dernierCaseRestante(Grid grid, int x, int y);
+
+#endif // SUDOKU_H_INCLUDED

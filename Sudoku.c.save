@@ -1,0 +1,288 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Sudoku.h"
+#include "type.h"
+
+/// /// /// /// /// /// AFFICHAGE /// /// /// /// /// ///
+
+///Pour l'affichage
+void Print_Tiret(int n)
+{
+    for (int i=0; i <n+1; i++) {
+        printf("---");
+    }
+}
+
+///Affiche le Sudoku
+void AfficheTab(Grid tab)
+{
+    printf ("Votre grille: \n \n");
+
+    Print_Tiret(NB_LONGUEUR);
+    printf("\n");
+
+    for(int i = 0; i < NB_LONGUEUR; i++) { //Première boucle pour le x
+        printf ("|");
+        for(int j = 0; j < NB_LONGUEUR; j++) { //Deuxième boucle pour le y
+            printf("%2d ", get_value(tab, i, j));
+            if (j%NB_CARRE == NB_CARRE - 1) {       //Sépare le sudoku en trois par trois colonnes
+                printf ("|");
+            }
+        }
+        if (i%NB_CARRE == NB_CARRE - 1) {           //Sépare le sudoku en trois par trois lignes
+            printf("\n");
+            Print_Tiret(NB_LONGUEUR);
+        }
+        printf("\n");
+    }
+}
+
+/// /// /// /// /// /// CREATION DU TABLEAU /// /// /// /// /// ///
+
+///Initialise les valeurs du tableau à 0
+void initTab(Grid tab)
+{
+    for(int i=0; i < NB_LONGUEUR; i++) {     //Première boucle pour le x
+        for(int j=0; j < NB_LONGUEUR; j++) { //Deuxième boucle pour le y
+            set_value(tab,i, j, 0);
+        }
+    }
+}
+
+///Ajoute une valeur donnée à la coordonnée donnée
+void add_value(Grid tab, int x, int y, int val)
+{
+    set_value(tab, x, y, val);
+}
+
+///Supprime la valeur d'une coordonnée donnée
+void rem_value(Grid tab, int x, int y)
+{
+    set_value(tab,x, y, 0);
+}
+/// /// /// /// /// /// VERIFICATION DU TABLEAU /// /// /// /// /// ///
+
+///Valide un rectangle
+bool valid(Grid tab, int xmin, int ymin, int xmax, int ymax)
+{
+    bool save[NB_LONGUEUR];                                         //Creation d'un tableau de bool
+    for(int i=0; i < NB_LONGUEUR; i++) {
+        save[i]=false;                                              //Initialisation du tableau a "false" pour toutes les cases
+    }
+    for(int x=xmin; x <= xmax; x++) {                               //Boucle pour naviguer entre les lignes
+        for(int y=ymin; y <= ymax; y++) {                           //Boucle pour naviguer entre les colonnes
+            if (get_value(tab, x, y) == 0) {}                       //Si la valeur est egal a 0 on ne fait rien
+            else if (save[get_value(tab, x, y)-1] == false) {
+                save[get_value(tab, x, y)-1] = true;            //Si la valeur est differente de 0 et que la case du tableau correspondante a la valeur est false
+            }                                                   //alors on met true a la case du tableau
+            else return false;                                  //Sinon on retourne false
+        }
+    }
+    return true;                                                    //Si tout ce passe bien la fonction renvoie true
+}
+
+///Vérifie si la ligne donnée est bonne ou non
+bool line_valid(Grid tab, int x)
+{
+    return valid(tab, x, 0, x, NB_LONGUEUR-1);
+}
+
+///Vérifie si la colonne donnée est bonne ou non
+bool column_valid(Grid tab, int y)
+{
+    return valid(tab, 0, y, NB_LONGUEUR-1, y);
+}
+
+///Vérifie si le carré donnée est bon ou non
+bool square_valid(Grid tab, int x, int y)
+{
+    return valid(tab, x, y, x+(NB_CARRE-1), y+(NB_CARRE-1));
+}
+
+///Vérifie si le sudoku est valide ou non en appelant les trois fonctions précédentes
+bool sudoku_valid(Grid tab)
+{
+    for (int i = 0; i < NB_LONGUEUR; i++) {                                 //Boucle qui permet de se déplacer dans le Sudoku grâce à l'indice i
+        if (line_valid(tab, i) == false || column_valid(tab, i) == false) { //Condition qui permet de savoir si la ligne et la colonne sont valides
+            return false;
+        }
+        if (i%(NB_LONGUEUR/NB_CARRE) == 0) {
+            if (square_valid(tab, i, (NB_LONGUEUR/NB_CARRE)-NB_CARRE ) == false ||
+                    square_valid(tab, i, (NB_LONGUEUR/NB_CARRE)   ) == false ||
+                    square_valid(tab, i, (NB_LONGUEUR/NB_CARRE +NB_CARRE)) == false ) {       //Condition qui permet de savoir si les carrés sont valides
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+/// /// /// /// /// /// REGLE /// /// /// /// /// ///
+
+
+/// 1er règle : Dernière case libre
+
+// Trouve la dernière case libre dans une zone (ligne, colonne ou carré)
+// et place le nombre manquant (règle "Dernière case libre")
+void derniereCaseLibre(Grid tab, int x, int y)
+{
+    if (get_value(tab, x, y) == 0) {
+        int val_manque = 0;
+        bool found[9] = {false};
+
+        // Parcourez la ligne, la colonne et le carré correspondants pour déterminer le nombre manquant
+        for (int i = 0; i < NB_LONGUEUR; i++) {
+            int line_val = get_value(tab, x, i);
+            int col_val = get_value(tab, i, y);
+            int carre_x = ((x / NB_CARRE) * NB_CARRE )+ (i / NB_CARRE);    // (x / NB_CARRE) * NB_CARRE : l'indice x du premier cell dans le carré,  (i / NB_CARRE) : parcourir x dans le carré
+            int carre_y = ((y / NB_CARRE) * NB_CARRE) + (i % NB_CARRE);    // idem pour y
+            int carre_val = get_value(tab, carre_x, carre_y);
+
+            if (line_val > 0) found[line_val - 1] = true;
+            if (col_val > 0) found[col_val - 1] = true;
+            if (carre_val > 0) found[carre_val - 1] = true;
+        }
+
+        // Trouvez le nombre manquant
+        for (int i = 0; i < 9; i++) {
+            if (!found[i]) {
+                val_manque = i + 1;
+                break;
+            }
+        }
+
+        // Placez le nombre manquant dans la case
+        set_value(tab, x, y, val_manque);
+    }
+}
+
+
+/// 2e règle : Dernière case restante
+
+// Vérifie si un nombre peut être placé dans une cellule sans violation des règles
+bool isExist(Grid tab, int x, int y, int val)
+{
+    // Vérifie si le nombre est déjà présent dans la ligne, la colonne et le carré correspondants
+    for (int i = 0; i < NB_LONGUEUR; i++) {
+        if (get_value(tab, x, i) == val || get_value(tab, i, y) == val) {
+            return true;
+        }
+        int carre_x = ((x / NB_CARRE) * NB_CARRE )+ (i / NB_CARRE);        // (x / NB_CARRE) * NB_CARRE : l'indice x du premier cell dans le carré,
+                                                                           // (i / NB_CARRE) : parcourir x dans le carré
+        int carre_y = ((y / NB_CARRE) * NB_CARRE )+ (i % NB_CARRE);        // idem pour y
+        if (get_value(tab, carre_x, carre_y) == val) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//void dernierCaseRestante(Grid tab, int val) {
+//    for (int row = 0; row < NB_LONGUEUR; row++) {
+//        for (int col = 0; col < NB_LONGUEUR; col++) {
+//            if (get_value(tab, row, col) == 0) {  // Vérifier si la case est vide
+//                bool safe = isExist(tab, row, col, val);
+//                if (!safe) {
+//                    set_value(tab, row, col, val);
+//                    return;  // Sortir de la fonction après avoir trouvé la dernière case restante
+//                }
+//            }
+//        }
+//    }
+//}
+
+//void dernierCaseRestante(Grid tab, int x, int y, int val)
+//{
+//    if (!isExist(tab,x,y,val)) {
+//        set_value(tab,x,y,val);
+//    }
+//}
+
+
+
+bool dernierCaseRestante(Grid tab, int x, int y) {
+    if (x == NB_LONGUEUR - 1 && y == NB_LONGUEUR - 1) {
+        // Si nous sommes à la dernière case, pas besoin de remplir.
+        return true;
+    }
+
+    if (get_value(tab,x,y) != 0) {
+        // Si la case n'est pas vide, passer à la case suivante.
+        int next_x = y == NB_LONGUEUR - 1 ? x + 1 : x;   // si on est à la dernière colonne dans la ligne, on  doit passer à la lignr suivant, sinon on reste
+        int next_y = y == NB_LONGUEUR - 1 ? 0 : y + 1;   // si on est à la dernière colonne, on doit passer à la lignr suivant et remetre y à 0, sion y = y+1
+
+        return dernierCaseRestante(tab, next_x, next_y);
+    }
+
+    for (int val = 1; val <= NB_LONGUEUR; ++val) {
+        if (!isExist(tab, x, y, val)) {
+            add_value(tab, x, y, val);
+
+            int next_x = y == NB_LONGUEUR - 1 ? x + 1 : x;
+            int next_y = y == NB_LONGUEUR - 1 ? 0 : y + 1;
+
+            if (dernierCaseRestante(tab, next_x, next_y)) {
+                return true;
+            }
+
+            // Si la valeur n'a pas conduit à une solution, réinitialiser la case.
+            add_value(tab, x, y, 0);
+        }
+    }
+
+    return false;  // Aucune valeur possible à cette position.
+}
+
+
+
+
+/// 3e règle : Dernier nombre possible0
+
+//// Place le nombre manquant dans une cellule lorsque 8 des 9 nombres sont déjà présents
+
+bool dernierNombrePossible(Grid tab, int x, int y)
+{
+    bool *temp = (bool*)calloc(sizeof(bool), NB_LONGUEUR);
+    for (int i = 0; i < NB_LONGUEUR; i++) {
+        int line_val = get_value(tab, x, i);
+        int col_val = get_value(tab, i, y);
+        int carre_x = ((x / NB_CARRE) * NB_CARRE )+ (i / NB_CARRE);    // (x / NB_CARRE) * NB_CARRE : l'indice x du premier cell dans le carré,  (i / NB_CARRE) : parcourir x dans le carré
+        int carre_y = ((y / NB_CARRE) * NB_CARRE) + (i % NB_CARRE);    // idem pour y
+        int carre_val = get_value(tab, carre_x, carre_y);
+
+        if (line_val != 0) {
+            temp[line_val - 1] = true;
+        }
+
+        if (col_val != 0){
+            temp[col_val - 1] = true;
+        }
+
+        if (carre_val != 0){
+            temp[carre_val - 1] = true;
+        }
+    }
+
+    // Vérifier s'il y a bien une possibilité et trouver le nombre manqué
+    int count = 0;
+    int val_manque = 0;
+
+    for (int i = 0; i < NB_LONGUEUR; i ++){
+        if (!temp[i]){
+            count ++;
+            val_manque = i+1;
+        }
+    }
+
+    free(temp);
+
+    // S'il y a qu'une seule possibilité, on peut le remplir dans la grille
+    if (count == 1){
+        set_value(tab, x, y, val_manque);
+        return true;
+    }
+    return false;
+}
+

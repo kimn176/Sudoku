@@ -1,0 +1,183 @@
+# depslib dependency file v1.0
+1700759860 source:c:\users\dorin\onedrive\bureau\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1707490355 c:\users\dorin\onedrive\bureau\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1700759898 source:c:\users\dorin\onedrive\bureau\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1694761151 source:c:\users\dorin\onedrive\bureau\sudoku\sdl.c
+
+1695059378 source:c:\users\clem\downloads\sudoku\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1695059023 c:\users\clem\downloads\sudoku\sudoku\sudoku.h
+	<stdbool.h>
+
+1695059431 source:c:\users\clem\downloads\sudoku\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1695917390 source:c:\users\dorin\onedrive\bureau\sudoku\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1697456367 c:\users\dorin\onedrive\bureau\sudoku\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1697456367 source:c:\users\dorin\onedrive\bureau\sudoku\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1695117663 source:c:\users\dorin\onedrive\bureau\sudoku2\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1695117769 c:\users\dorin\onedrive\bureau\sudoku2\sudoku\sudoku.h
+	<stdbool.h>
+
+1695118218 source:c:\users\dorin\onedrive\bureau\sudoku2\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1695825136 source:c:\users\marti\onedrive\bureau\cours\l3\prog c\projetsudoku\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1695825303 c:\users\marti\onedrive\bureau\cours\l3\prog c\projetsudoku\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1695825136 source:c:\users\marti\onedrive\bureau\cours\l3\prog c\projetsudoku\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1707233253 source:c:\users\marti\onedrive\bureau\cours\l3\gestion de projet\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1707143456 c:\users\marti\onedrive\bureau\cours\l3\gestion de projet\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1707235576 source:c:\users\marti\onedrive\bureau\cours\l3\gestion de projet\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1697456367 c:\users\dorin\onedrive\bureau\sudoku\sudoku\type.h
+
+1697456384 source:c:\users\dorin\onedrive\bureau\sudoku\sudoku\type.c
+	"Sudoku.h"
+
+1707490355 source:c:\users\dorin\onedrive\bureau\sudoku\type.c
+	"Sudoku.h"
+
+1700226083 source:c:\users\su\downloads\sudoku\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1700225460 c:\users\su\downloads\sudoku\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1699287441 source:c:\users\su\downloads\sudoku\sudoku\type.c
+	"Sudoku.h"
+
+1700225460 source:c:\users\su\downloads\sudoku\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1697456368 c:\users\su\downloads\sudoku\sudoku\type.h
+
+1700758946 c:\users\dorin\onedrive\bureau\sudoku\type.h
+
+1700756385 source:c:\users\clem\onedrive\bureau\sudoku_2\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1700755619 c:\users\clem\onedrive\bureau\sudoku_2\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1700755619 source:c:\users\clem\onedrive\bureau\sudoku_2\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1700755619 c:\users\clem\onedrive\bureau\sudoku_2\sudoku\type.h
+
+1700755619 source:c:\users\clem\onedrive\bureau\sudoku_2\sudoku\type.c
+	"Sudoku.h"
+
+1707062721 source:c:\users\clem\onedrive\bureau\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1707060735 c:\users\clem\onedrive\bureau\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1707063076 source:c:\users\clem\onedrive\bureau\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1705595453 c:\users\clem\onedrive\bureau\sudoku\type.h
+
+1706958672 source:c:\users\clem\onedrive\bureau\sudoku\type.c
+	"Sudoku.h"
+
+1707232059 c:\users\marti\onedrive\bureau\cours\l3\gestion de projet\sudoku\type.h
+
+1707232028 source:c:\users\marti\onedrive\bureau\cours\l3\gestion de projet\sudoku\type.c
+	"Sudoku.h"
+
+1707482480 source:c:\users\cleme\desktop\sudoku\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+
+1707480305 c:\users\cleme\desktop\sudoku\sudoku.h
+	<stdbool.h>
+	<math.h>
+
+1707483054 source:c:\users\cleme\desktop\sudoku\sudoku.c
+	<stdio.h>
+	<stdlib.h>
+	"Sudoku.h"
+	"type.h"
+
+1707483035 c:\users\cleme\desktop\sudoku\type.h
+
+1707483108 source:c:\users\cleme\desktop\sudoku\type.c
+	"Sudoku.h"
+
